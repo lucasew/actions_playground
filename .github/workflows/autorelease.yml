@@ -16,8 +16,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: fastai/workflows/ssh@master
         if: github.event_name == 'workflow_dispatch'
@@ -44,10 +42,14 @@ jobs:
 
       - name: Install dependencies
         run: mise run install
+        env:
+          MISE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run codegen
         run: |
           mise run codegen
+        env:
+          MISE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create PR if codegen changed files
         if: matrix.os == 'ubuntu-latest'
@@ -61,6 +63,8 @@ jobs:
 
       - name: Run CI
         run: mise run ci
+        env:
+          MISE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Release
         if: (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')) && matrix.os == 'ubuntu-latest'
