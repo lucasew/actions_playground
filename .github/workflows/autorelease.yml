@@ -24,6 +24,8 @@ jobs:
           key_file: id_ecdsa
 
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - run: |
           if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
@@ -59,7 +61,6 @@ jobs:
           title: "chore: update codegen"
           body: "Auto-generated PR for codegen updates"
           branch: "chore/update-codegen"
-          base: ${{ github.head_ref || github.ref_name }}
 
       - name: Run CI
         run: mise run ci
