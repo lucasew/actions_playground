@@ -9,11 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: fastai/workflows/ssh@master
+    - uses: fastai/workflows/ssh@8683f21d489beacc145d8eb2a3bee07b49741036 # master
       with:
         ssh_key: ${{ secrets.SSH_KEY }}
         key_file: id_ecdsa
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
     - run: source script-linux.sh
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@master
+      uses: mxschmitt/action-tmate@bc851d89c40e7e5bebf43138e74bedc4a650f863 # master
