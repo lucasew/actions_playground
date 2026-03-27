@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-    - uses: fastai/workflows/ssh@master
+    - uses: fastai/workflows/ssh@8683f21d489beacc145d8eb2a3bee07b49741036 # master
       with:
         ssh_key: ${{ secrets.SSH_KEY }}
         key_file: id_ecdsa
